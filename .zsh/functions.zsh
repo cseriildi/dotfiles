@@ -8,58 +8,6 @@ PERF="⚡ perf"
 TEST="🧪 test"
 REVERT="⏪ revert"
 
-gccommit() {
-  local label=$1
-  local commit_message=$2
-  local description=$3
-
-  if [ -z "$commit_message" ]; then
-    echo "Usage: $FUNCNAME <commit_message> [description]"
-  else
-    if [ -n "$description" ]; then
-      git commit -m "$label: $commit_message" -m "$description"
-    else
-      git commit -m "$label: $commit_message"
-    fi
-  fi
-}
-
-gcfeat() { 
-  gccommit "$FEAT" "$1" "$2"
-}
-
-gcfix() { 
-  gccommit "$FIX" "$1" "$2"
-}
-
-gcchore() { 
-  gccommit "$CHORE" "$1" "$2"
-}
-
-gcdocs() { 
-  gccommit "$DOCS" "$1" "$2"
-}
-
-gcstyle() { 
-  gccommit "$STYLE" "$1" "$2"
-}
-
-gcrefactor() { 
-  gccommit "$REFACTOR" "$1" "$2"
-}
-
-gcperf() { 
-  gccommit "$PERF" "$1" "$2"
-}
-
-gctest() { 
-  gccommit "$TEST" "$1" "$2"
-}
-
-gcrevert() { 
-  gccommit "$REVERT" "$1" "$2"
-}
-
 githelp() {
   echo "\n🚀 Commit Labeling Conventions:\n"
   echo "  $FEAT     → A new feature"
