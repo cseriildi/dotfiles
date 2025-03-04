@@ -15,5 +15,8 @@ backup_and_create_link() {
 }
 
 backup_and_create_link .zshrc
+if [ ! -d "$HOME/.zsh" ]; then
+  mkdir "$HOME/.zsh"
+fi
 backup_and_create_link .zsh/functions.zsh
 backup_and_create_link .zsh/aliases.zsh
