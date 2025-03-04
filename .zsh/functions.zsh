@@ -6,87 +6,58 @@ STYLE="🎨 style"
 REFACTOR="♻️ refactor"
 PERF="⚡ perf"
 TEST="🧪 test"
-CI="🔄 ci"
 REVERT="⏪ revert"
 
+gccommit() {
+  local label=$1
+  local commit_message=$2
+  local description=$3
+
+  if [ -z "$commit_message" ]; then
+    echo "Usage: $FUNCNAME <commit_message> [description]"
+  else
+    if [ -n "$description" ]; then
+      git commit -m "$label: $commit_message" -m "$description"
+    else
+      git commit -m "$label: $commit_message"
+    fi
+  fi
+}
+
 gcfeat() { 
-  if [ -z "$1" ]; then 
-    echo "Usage: gcfeat <commit_message>";
-  else 
-    git commit -m "$FEAT: $*"; 
-  fi 
+  gccommit "$FEAT" "$1" "$2"
 }
 
 gcfix() { 
-  if [ -z "$1" ]; then 
-    echo "Usage: gcfix <commit_message>";
-  else 
-    git commit -m "$FIX: $*"; 
-  fi 
+  gccommit "$FIX" "$1" "$2"
 }
 
 gcchore() { 
-  if [ -z "$1" ]; then 
-    echo "Usage: gcchore <commit_message>";
-  else 
-    git commit -m "$CHORE: $*"; 
-  fi 
+  gccommit "$CHORE" "$1" "$2"
 }
 
 gcdocs() { 
-  if [ -z "$1" ]; then 
-    echo "Usage: gcdocs <commit_message>";
-  else 
-    git commit -m "$DOCS: $*"; 
-  fi 
+  gccommit "$DOCS" "$1" "$2"
 }
 
 gcstyle() { 
-  if [ -z "$1" ]; then 
-    echo "Usage: gcstyle <commit_message>";
-  else 
-    git commit -m "$STYLE: $*"; 
-  fi 
+  gccommit "$STYLE" "$1" "$2"
 }
 
 gcrefactor() { 
-  if [ -z "$1" ]; then 
-    echo "Usage: gcrefactor <commit_message>";
-  else 
-    git commit -m "$REFACTOR: $*"; 
-  fi 
+  gccommit "$REFACTOR" "$1" "$2"
 }
 
 gcperf() { 
-  if [ -z "$1" ]; then 
-    echo "Usage: gcperf <commit_message>";
-  else 
-    git commit -m "$PERF: $*"; 
-  fi 
+  gccommit "$PERF" "$1" "$2"
 }
 
 gctest() { 
-  if [ -z "$1" ]; then 
-    echo "Usage: gctest <commit_message>";
-  else 
-    git commit -m "$TEST: $*"; 
-  fi 
-}
-
-gcci() { 
-  if [ -z "$1" ]; then 
-    echo "Usage: gcci <commit_message>";
-  else 
-    git commit -m "$CI: $*"; 
-  fi 
+  gccommit "$TEST" "$1" "$2"
 }
 
 gcrevert() { 
-  if [ -z "$1" ]; then 
-    echo "Usage: gcrevert <commit_message>";
-  else 
-    git commit -m "$REVERT: $*"; 
-  fi 
+  gccommit "$REVERT" "$1" "$2"
 }
 
 githelp() {
@@ -99,7 +70,6 @@ githelp() {
   echo "  $REFACTOR → Code restructuring without changing functionality"
   echo "  $PERF     → Performance improvements"
   echo "  $TEST     → Adding or modifying tests"
-  echo "  $CI       → CI/CD configuration changes"
   echo "  $REVERT   → Reverting previous commits"
 
   echo -e "\nViewing Logs"
