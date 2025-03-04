@@ -1,6 +1,6 @@
 gcfeat() { 
   if [ -z "$1" ]; then 
-    git commit -m "✨ feat: " 
+    GIT_EDITOR="echo '✨ feat: ' && $EDITOR" git commit
   else 
     git commit -m "✨ feat: $*"; 
   fi 
@@ -98,11 +98,13 @@ githelp() {
     echo -e "\nViewing Changes"
     echo -e "  git diff          → Show unstaged changes"
     echo -e "  git diff --staged → Show staged changes"
+	echo -e "  git add -p        → Interactively stage changes"
 
     echo -e "\nAmending & Merging"
     echo -e "  git commit --amend → Edit the last commit"
     echo -e "  git merge <branch> → Merge a branch into the current one"
     echo -e "  git rebase <branch> → Reapply commits on top of another base"
+	echo -e "  git rebase -i HEAD~<num> → Interactively rebase the last <num> commits"
 
     echo -e "\nStashing & Saving Work"
     echo -e "  git stash         → Save uncommitted changes temporarily"
@@ -116,6 +118,6 @@ githelp() {
     echo -e "  git reset --hard <commit> → Undo the last commit and discard changes"
     echo -e "  git reset <file> → Unstage a file from the staging area"
 
-    echo -e "\ngit cherry-pick <commit_hash> → Apply a specific commit to current branch"
+    echo -e "\n  git cherry-pick <commit_hash> → Apply a specific commit to current branch"
 
 }
