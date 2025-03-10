@@ -1,3 +1,7 @@
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell" # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 plugins=(git)
@@ -9,6 +13,10 @@ source ~/.zsh/aliases.zsh
 #apple
 if [[ "$(uname)" == "Darwin" ]]; then 
 	export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+	export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
+	export PATH="/opt/homebrew/opt/ncurses/bin:$PATH"
+	export LDFLAGS="-L/opt/homebrew/opt/ncurses/lib"
+	export CPPFLAGS="-I/opt/homebrew/opt/ncurses/include"
     
 #linux
 elif [[ "$(uname)" == "Linux" ]]; then
@@ -23,3 +31,4 @@ elif [[ "$(uname)" == "Linux" ]]; then
 	export PATH=$HOME/.brew/bin:$PATH
    
 fi
+
